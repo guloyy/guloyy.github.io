@@ -1,11 +1,7 @@
 body {
   min-height: 100vh;
   margin: 0;
-  background-color: #87ceeb; /* Sky blue */
-  background-image: url('flower.png');
-  background-repeat: repeat;
-  background-size: 64px 64px; /* Adjust size as needed */
-  background-position: center;
+  background-color: #b3e5fc; /* Baby blue */
 }
 
 h1 {
@@ -15,3 +11,30 @@ h1 {
   font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
   text-shadow: 1px 2px 8px #fff8;
 } 
+
+.container {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 0 20px;
+}
+
+.profile {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.profile-photo {
+  width: 180px;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px #0001;
+}
+
+.intro {
+  color: #222;
+  line-height: 1.6;
+  font-size: 1rem;
+}
