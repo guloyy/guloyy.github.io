@@ -1,8 +1,58 @@
+:root {
+  --frame-width: 64px;
+  --flower-size: 48px; /* tile size; smaller than frame width creates larger gaps */
+}
+
+html {
+  background-color: #e3f2fd; /* Gentle baby blue */
+}
+
 body {
   min-height: 100vh;
   margin: 0;
-  background-color: #b3e5fc; /* Baby blue */
+  background-color: #e3f2fd; /* Gentle baby blue */
+  background-image: none;
+  padding-left: calc(var(--frame-width) + 48px);
+  padding-right: calc(var(--frame-width) + 48px);
+  padding-top: 48px;
+  padding-bottom: 48px;
 }
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: var(--frame-width);
+  background-image: url('flower.png?v=2');
+  background-repeat: no-repeat space; /* x y: no horizontal repeat, spaced vertical repeat */
+  background-size: var(--flower-size) var(--flower-size);
+  background-position: center top;
+  z-index: 0;
+  pointer-events: none;
+}
+
+body::before { left: 0; }
+body::after { right: 0; }
+
+html::before,
+html::after {
+  content: "";
+  position: fixed;
+  left: 0;
+  right: 0;
+  height: var(--frame-width);
+  background-image: url('flower.png?v=2');
+  background-repeat: space no-repeat; /* x y: spaced horizontal repeat, no vertical repeat */
+  background-size: var(--flower-size) var(--flower-size);
+  background-position: center;
+  z-index: 0;
+  pointer-events: none;
+}
+
+html::before { top: 0; }
+html::after { bottom: 0; }
 
 h1 {
   text-align: center;
@@ -10,24 +60,28 @@ h1 {
   color: #222;
   font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
   text-shadow: 1px 2px 8px #fff8;
+  position: relative;
+  z-index: 1;
 } 
 
 .container {
   max-width: 900px;
   margin: 40px auto;
   padding: 0 20px;
+  position: relative;
+  z-index: 1;
 }
 
 .profile {
   display: grid;
-  grid-template-columns: 180px 1fr;
+  grid-template-columns: auto 1fr;
   gap: 24px;
   align-items: start;
 }
 
 .profile-photo {
-  width: 180px;
-  height: 180px;
+  width: 240px;
+  height: 240px;
   object-fit: cover;
   border-radius: 12px;
   box-shadow: 0 4px 12px #0001;
@@ -37,4 +91,60 @@ h1 {
   color: #222;
   line-height: 1.6;
   font-size: 1rem;
+  font-weight: 600;
+}
+
+.previous-work {
+  margin-top: 48px;
+}
+
+.previous-work h2 {
+  margin: 0 0 16px 0;
+  font-size: 1.25rem;
+  text-decoration: underline;
+}
+
+.previous-work ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.previous-work-subtitle {
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.previous-work li {
+  margin: 10px 0;
+}
+
+.previous-work a {
+  color: #0b5cab;
+  text-decoration: none;
+}
+
+.previous-work a:hover {
+  text-decoration: underline;
+}
+
+.role-badge {
+  margin-left: 8px;
+  color: #555;
+}
+
+/* Remove top/bottom flower borders; keep side frames */
+html::before,
+html::after {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  :root { --frame-width: 32px; --flower-size: 24px; }
+  .profile {
+    grid-template-columns: 1fr;
+  }
+  .profile-photo {
+    justify-self: center;
+  }
 }
